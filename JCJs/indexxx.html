@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocolo Independencia // Conmemoración Patria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde-patrio: #006341;
+  --rojo-patrio: #ce1126;
+  --oro-patrio: #d4a94e;
+  --texto-principal: #ffffff;
+  --texto-secundario: #cbd5e1;
+  --glass-bg: rgba(10, 14, 20, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body, html {
+  width: 100vw; height: 100vh; overflow: hidden;
+  background-color: #080c10;
+  font-family: var(--font-body);
+  color: var(--texto-principal);
+}
+
+/* === FONDO CON raul.png === */
+.bg-layer {
+  position: absolute; inset: 0; z-index: 1;
+  background: 
+    linear-gradient(to bottom, rgba(8, 12, 16, 0.6), rgba(8, 12, 16, 0.85)),
+    url('raul.png') no-repeat center center / cover;
+}
+
+/* === ESTRUCTURA PRINCIPAL === */
+.app-container {
+  position: relative; z-index: 2;
+  width: 100vw; height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+/* === NAVEGACIÓN POR PESTAÑAS (TABS) === */
+.nav-header {
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 8px 8px 0 0;
+  padding: 12px 20px;
+}
+
+.brand-title {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-sans); font-weight: 700; font-size: 16px;
+  letter-spacing: 0.5px;
+}
+.flag-strip { display: flex; width: 24px; height: 14px; border-radius: 2px; overflow: hidden; }
+.flag-strip span { flex: 1; height: 100%; }
+.flag-strip .g { background: var(--verde-patrio); }
+.flag-strip .w { background: #ffffff; }
+.flag-strip .r { background: var(--rojo-patrio); }
+
+.tabs-menu { display: flex; gap: 6px; list-style: none; }
+.tab-btn {
+  background: transparent; border: 1px solid transparent;
+  color: var(--texto-secundario); font-family: var(--font-sans);
+  font-size: 13px; font-weight: 500; padding: 8px 16px;
+  border-radius: 6px; cursor: pointer; transition: all 0.25s ease;
+}
+.tab-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+.tab-btn.active {
+  color: #fff; background: rgba(0, 99, 65, 0.5);
+  border-color: var(--verde-patrio); font-weight: 700;
+}
+
+/* === CONTENEDOR DE PESTAÑAS (SLIDES) === */
+.content-area {
+  flex: 1; margin: 20px 0; position: relative; overflow: hidden;
+}
+
+.tab-pane {
+  position: absolute; inset: 0; display: none;
+  flex-direction: column; justify-content: center;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px); border-radius: 12px;
+  padding: 40px; opacity: 0; transition: opacity 0.3s ease;
+}
+.tab-pane.active { display: flex; opacity: 1; }
+
+/* ESTILOS DE TEXTO Y CONTENIDO */
+.tag {
+  font-family: var(--font-sans); font-size: 12px; color: var(--oro-patrio);
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 700;
+}
+h2.pane-title {
+  font-family: var(--font-sans); font-size: 28px; font-weight: 700;
+  margin-bottom: 12px; color: #fff;
+}
+p.pane-desc { font-size: 14px; color: var(--texto-secundario); max-width: 700px; line-height: 1.6; margin-bottom: 24px; }
+
+/* PESTAÑA 1: INICIO */
+.hero-wrap { text-align: center; margin: 0 auto; max-width: 800px; }
+.hero-wrap h1 { font-size: 54px; font-family: var(--font-sans); font-weight: 700; line-height: 1.1; margin-bottom: 16px; }
+.hero-wrap .dates { color: var(--oro-patrio); font-size: 20px; font-weight: 600; display: block; margin-top: 8px; }
+
+/* GRIDS PARA HISTORIA, CURIOSIDADES Y PROTAGONISTAS */
+.cards-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px; width: 100%;
+}
+.info-card {
+  background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px; border-radius: 8px; transition: transform 0.2s;
+}
+.info-card:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.07); }
+.info-card h3 { font-size: 16px; color: var(--oro-patrio); margin-bottom: 8px; font-family: var(--font-sans); }
+.info-card h4 { font-size: 12px; color: var(--texto-secundario); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
+.info-card p { font-size: 13px; color: #e2e8f0; line-height: 1.5; }
+
+/* TABLA MITOS VS REALIDAD */
+.custom-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.custom-table th, .custom-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--glass-border); font-size: 13px; }
+.custom-table th { font-family: var(--font-sans); color: var(--oro-patrio); }
+.custom-table .mito { color: #f87171; font-weight: 600; }
+.custom-table .realidad { color: #4ade80; font-weight: 600; }
+
+/* SECCIÓN NIÑOS HÉROES */ 
+.heroes-highlight {
+  position: absolute; inset:0; z-index: indn; 
+  display: grid; grid-template-columns: 1fr 2fr; gap: 24px; align-items: center;
+  background: 
+    linear-gradient(to bottom, rgba(8, 12, 16, 0.6), rgba(8, 12, 16, 0.85)),
+    url('gilberto.png') no-repeat center center / cover;
+}
+.heroes-box {
+  background: rgba(206, 17, 38, 0.15); border: 1px solid var(--rojo-patrio);
+  padding: 24px; border-radius: 8px; text-align: center;
+}
+.heroes-box h3 { font-size: 32px; font-family: var(--font-sans); color: #fff; }
+.heroes-box p { font-size: 12px; color: var(--texto-secundario); margin-top: 6px; }
+
+/* === FOOTER === */
+.footer-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--glass-border); padding-top: 12px;
+  font-size: 12px; color: var(--texto-secundario); font-family: var(--font-sans);
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<div class="app-container">
+  <!-- NAVEGACIÓN SUPERIOR (PESTAÑAS) -->
+  <header class="nav-header">
+    <div class="brand-title">
+      <div class="flag-strip"><span class="g"></span><span class="w"></span><span class="r"></span></div>
+      <span>INDEPENDENCIA DE MÉXICO</span>
+    </div>
+    <ul class="tabs-menu">
+      <li><button class="tab-btn active" onclick="switchTab(0)">Inicio</button></li>
+      <li><button class="tab-btn" onclick="switchTab(1)">Contexto</button></li>
+      <li><button class="tab-btn" onclick="switchTab(2)">Cronología</button></li>
+      <li><button class="tab-btn" onclick="switchTab(3)">Niños Héroes</button></li>
+      <li><button class="tab-btn" onclick="switchTab(4)">Personajes</button></li>
+      <li><button class="tab-btn" onclick="switchTab(5)">Datos Curiosos</button></li>
+      <li><button class="tab-btn" onclick="switchTab(6)">Mitos vs Realidad</button></li>
+    </ul>
+  </header>
+
+  <!-- ÁREA DE CONTENIDO FLOTANTE (SLIDES) -->
+  <main class="content-area">
+
+    <!-- PESTAÑA 0: INICIO -->
+    <section class="tab-pane active">
+      <div class="hero-wrap">
+        <div class="tag">Presentación Conmemorativa</div>
+        <h1>SEPTIEMBRE PATRIO<span class="dates">1810 — 1821</span></h1>
+        <p class="pane-desc" style="margin: 0 auto 24px;">Una revisión histórica sobre las fechas clave, personajes ilustres, mitos y acontecimientos fundamentales que consolidaron la independencia de nuestra nación.</p>
+        <div style="font-family: var(--font-sans); font-size: 13px; color: var(--oro-patrio);">Origen: Dolores Hidalgo, Guanajuato | Duración de Campaña: 11 Años</div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 1: CONTEXTO -->
+    <section class="tab-pane">
+      <div class="tag">Sección 01 // Contexto Histórico</div>
+      <h2 class="pane-title">¿Por qué septiembre es el mes patrio?</h2>
+      <p class="pane-desc">Cada año, México conmemora el inicio del movimiento independentista y rinde homenaje a las figuras que lucharon por la libertad del país.</p>
+      <div class="cards-grid">
+        <div class="info-card">
+          <h3>El Grito de Dolores</h3>
+          <p>Conmemoración de la proclama emitida la madrugada del 16 de septiembre de 1810 por el cura Miguel Hidalgo.</p>
+        </div>
+        <div class="info-card">
+          <h3>Héroes Nacionales</h3>
+          <p>Reconocimiento a figuras fundamentales como Miguel Hidalgo, José María Morelos y Josefa Ortiz de Domínguez.</p>
+        </div>
+        <div class="info-card">
+          <h3>Simbolismo Tricolor</h3>
+          <p>El verde representa la esperanza y la independencia; el blanco, la unidad y la fe; el rojo, la sangre derramada por los héroes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 2: CRONOLOGÍA -->
+    <section class="tab-pane">
+      <div class="tag">Sección 02 // Fechas Importantes</div>
+      <h2 class="pane-title">Línea de Tiempo de Septiembre</h2>
+      <p class="pane-desc">Acontecimientos clave que marcan el calendario cívico nacional durante este mes.</p>
+      <div class="cards-grid">
+        <div class="info-card">
+          <h3>1 de Septiembre</h3>
+          <p>Rendición del Informe Presidencial sobre el estado de la administración pública.</p>
+        </div>
+        <div class="info-card">
+          <h3>15 de Septiembre</h3>
+          <p>Ceremonia nocturna del Grito de Independencia en memoria de la proclama de Hidalgo.</p>
+        </div>
+        <div class="info-card">
+          <h3>16 de Septiembre</h3>
+          <p>Día de la Independencia de México, celebrado con el tradicional desfile cívico-militar.</p>
+        </div>
+        <div class="info-card">
+          <h3>27 de Septiembre</h3>
+          <p>Consumación de la Independencia en 1821 con la entrada del Ejército Trigarante a la Ciudad de México.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 3: NIÑOS HÉROES -->
+    <section class="tab-pane">
+      <div class="tag">Sección Especial // Gesta Heroica</div>
+      <h2 class="pane-title">13 de Septiembre: La Defensa de Chapultepec</h2>
+      <p class="pane-desc">Conmemoración de los cadetes del Colegio Militar que defendieron el Castillo de Chapultepec durante la intervención estadounidense en 1847.</p>
+      <div class="heroes-highlight">
+        <div class="heroes-box">
+          <h3>1847</h3>
+          <p>BATALLA DE CHAPULTEPEC</p>
+        </div>
+        <div class="info-card">
+          <h3>Cadetes Ilustres</h3>
+          <p>Juan de la Barrera, Juan Escutia, Francisco Márquez, Agustín Melgar, Fernando Montes de Oca y Vicente Suárez son recordados por su valentía en la defensa de la patria.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 4: PERSONAJES -->
+    <section class="tab-pane">
+      <div class="tag">Sección 03 // Protagonistas</div>
+      <h2 class="pane-title">Personajes Ilustres del Movimiento</h2>
+      <p class="pane-desc">Líderes militares y civiles que impulsaron la causa independentista.</p>
+      <div class="cards-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="info-card">
+          <h3>Miguel Hidalgo</h3>
+          <h4>Padre de la Patria</h4>
+          <p>Iniciador de la lucha armada la madrugada del 16 de septiembre de 1810.</p>
+        </div>
+        <div class="info-card">
+          <h3>José María Morelos</h3>
+          <h4>Estratega Militar</h4>
+          <p>Organizador del Congreso de Chilpancingo y autor de "Sentimientos de la Nación".</p>
+        </div>
+        <div class="info-card">
+          <h3>Josefa Ortiz</h3>
+          <h4>La Corregidora</h4>
+          <p>Alertó a los insurgentes sobre el descubrimiento de la conspiración de Querétaro.</p>
+        </div>
+        <div class="info-card">
+          <h3>Ignacio Allende</h3>
+          <h4>Jefe Militar</h4>
+          <p>Capitán del ejército insurgente que coordinó las primeras campañas junto a Hidalgo.</p>
+        </div>
+        <div class="info-card">
+          <h3>Vicente Guerrero</h3>
+          <h4>Consumador</h4>
+          <p>Mantuvo viva la resistencia insurgente y pactó la paz con el Plan de Iguala en 1821.</p>
+        </div>
+        <div class="info-card">
+          <h3>Agustín de Iturbide</h3>
+          <h4>Ejército Trigarante</h4>
+          <p>Comandó la entrada triunfal del Ejército Trigarante a la capital mexicana.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 5: DATOS CURIOSOS -->
+    <section class="tab-pane">
+      <div class="tag">Sección 04 // Bitácora Histórica</div>
+      <h2 class="pane-title">Datos Curiosos de la Historia</h2>
+      <p class="pane-desc">Detalles poco conocidos sobre el proceso independentista.</p>
+      <div class="cards-grid">
+        <div class="info-card">
+          <h3>El Grito Original</h3>
+          <p>No se conserva un registro textual exacto de las palabras pronunciadas por Miguel Hidalgo en 1810.</p>
+        </div>
+        <div class="info-card">
+          <h3>Ajuste de Fecha</h3>
+          <p>Durante el porfiriato, la celebración popular del Grito comenzó a realizarse la noche del 15 de septiembre.</p>
+        </div>
+        <div class="info-card">
+          <h3>La Campana de Dolores</h3>
+          <p>La esquila original tocada por Hidalgo se conserva y resguarda en el Palacio Nacional.</p>
+        </div>
+        <div class="info-card">
+          <h3>Significado de los Colores</h3>
+          <p>Para el Ejército Trigarante, el verde representaba la independencia, el blanco la fe y el rojo la unión.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 6: MITOS VS REALIDAD -->
+    <section class="tab-pane">
+      <div class="tag">Sección 05 // Verificación Histórica</div>
+      <h2 class="pane-title">Mitos vs. Realidad</h2>
+      <p class="pane-desc">Aclaraciones sobre creencias populares relacionadas con la independencia.</p>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Creencia Popular (Mito)</th>
+            <th>Aclaración Histórica (Realidad)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mito">✕ Hidalgo exclamó "¡Viva México!" en Dolores.</td>
+            <td class="realidad">✓ La denominación oficial de México como nación independiente surgió hasta 1821.</td>
+          </tr>
+          <tr>
+            <td class="mito">✕ La independencia se consiguió el 16 de septiembre de 1810.</td>
+            <td class="realidad">✓ Esa fecha marca el inicio del conflicto armado; el proceso concluyó 11 años después, en 1821.</td>
+          </tr>
+          <tr>
+            <td class="mito">✕ El Grito debe realizarse exactamente a las 23:00 hrs.</td>
+            <td class="realidad">✓ El horario de la ceremonia cívica se adapta al protocolo y agenda oficial de cada gobierno.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="footer-bar">
+    <span>"LA PATRIA ES PRIMERO" — VICENTE GUERRERO</span>
+    <span>¡VIVA MÉXICO!</span>
+  </footer>
+</div>
+
+<script>
+  function switchTab(index) {
+    const buttons = document.querySelectorAll('.tab-btn');
+    const panes = document.querySelectorAll('.tab-pane');
+
+    buttons.forEach((btn, i) => {
+      if (i === index) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    panes.forEach((pane, i) => {
+      if (i === index) {
+        pane.classList.add('active');
+      } else {
+        pane.classList.remove('active');
+      }
+    });
+  }
+
+  // Navegación con flechas del teclado
+  let currentIndex = 0;
+  document.addEventListener('keydown', (e) => {
+    const totalTabs = 7;
+    if (e.key === 'ArrowRight') {
+      currentIndex = (currentIndex + 1) % totalTabs;
+      switchTab(currentIndex);
+    } else if (e.key === 'ArrowLeft') {
+      currentIndex = (currentIndex - 1 + totalTabs) % totalTabs;
+      switchTab(currentIndex);
+    }
+  });
+</script>
+</body>
+</html>
