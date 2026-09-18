@@ -1,0 +1,343 @@
+:root {
+  --verde: #006341;
+  --verde-osc: #013220;
+  --rojo: #CE1126;
+  --blanco: #FFFFFF;
+  --gris-fondo: #F4F4F2;
+  --gris-texto: #4A4A4A;
+  --gris-borde: #E1E1DE;
+  --dorado: #C9A24B;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  /* Fondo personalizado raul.png */
+  background: url('raul.png') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+  color: var(--gris-texto);
+  overflow: hidden;
+}
+
+.deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stage {
+  position: relative;
+  width: min(100vw, 177.78vh);
+  height: min(100vh, 56.25vw);
+  background: var(--blanco);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  padding: 4.2% 5%;
+  background: var(--gris-fondo);
+}
+
+.slide.active {
+  display: block;
+}
+
+.slide.dark {
+  background: var(--verde-osc);
+  color: var(--blanco);
+}
+
+/* ---------- CÍRCULOS DECORATIVOS ---------- */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ---------- TIPOGRAFÍA ---------- */
+h1.title-serif {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  color: var(--verde);
+  margin: 0 0 0.3em 0;
+}
+
+.eyebrow {
+  color: var(--dorado);
+  font-weight: 700;
+  letter-spacing: 4px;
+  font-size: clamp(11px, 1vw, 15px);
+  margin-bottom: 0.6em;
+}
+
+.subtitle {
+  color: var(--gris-texto);
+  font-size: clamp(12px, 1.15vw, 16px);
+  font-style: italic;
+  margin: -0.4em 0 1.4em 0;
+}
+
+.dark .subtitle {
+  color: #D8E6DC;
+  font-style: normal;
+}
+
+.footer-tag {
+  position: absolute;
+  left: 5%;
+  bottom: 4%;
+  font-size: clamp(9px, 0.85vw, 12px);
+  font-style: italic;
+  color: #9AA79E;
+}
+
+/* ---------- BANDERITA ---------- */
+.flag-chip {
+  display: flex;
+  gap: 6px;
+}
+
+.flag-chip span {
+  width: 34px;
+  height: 10px;
+  display: inline-block;
+}
+
+.flag-chip .g { background: var(--verde); }
+.flag-chip .w { background: var(--blanco); }
+.flag-chip .r { background: var(--rojo); }
+
+/* ---------- TARJETAS ---------- */
+.card {
+  background: var(--blanco);
+  border: 1px solid var(--gris-borde);
+  border-radius: 10px;
+}
+
+.badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--blanco);
+  flex-shrink: 0;
+  font-size: 1.1em;
+}
+
+/* ---------- SLIDE 1 : PORTADA ---------- */
+#s1 { display: flex; align-items: center; }
+#s1 .content { position: relative; z-index: 2; max-width: 62%; }
+#s1 h1 {
+  font-size: clamp(34px, 6.5vw, 76px);
+  color: var(--blanco);
+  margin: 0.1em 0 0.25em 0;
+  letter-spacing: 1px;
+}
+#s1 p.lead {
+  font-size: clamp(13px, 1.3vw, 17px);
+  line-height: 1.5;
+  color: #D8E6DC;
+  margin-bottom: 1.6em;
+}
+#s1 .circle.c1 {
+  width: 48%; height: 0; padding-bottom: 48%;
+  top: -18%; right: -8%; background: var(--verde); opacity: 0.55;
+}
+#s1 .circle.c2 {
+  width: 30%; height: 0; padding-bottom: 30%;
+  bottom: -14%; right: 6%; background: var(--rojo); opacity: 0.4;
+}
+
+/* ---------- SLIDE 2 : INTRO ---------- */
+.stat-card {
+  position: absolute;
+  top: 15%; right: 5%;
+  width: 32%;
+  background: var(--verde);
+  color: var(--blanco);
+  border-radius: 10px;
+  padding: 1.4em 1.6em;
+}
+.stat-card .num {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1;
+}
+.stat-card .lbl {
+  font-size: clamp(11px, 1vw, 13px);
+  margin-top: 0.5em;
+  color: #E4F0E8;
+  line-height: 1.4;
+}
+
+.intro-row {
+  position: absolute;
+  left: 5%; right: 5%; top: 40%; bottom: 8%;
+  display: flex; gap: 2%;
+}
+.intro-row .card {
+  flex: 1; padding: 1.1em 1.2em;
+  display: flex; flex-direction: column;
+}
+.intro-row .badge { margin-bottom: 0.7em; }
+.intro-row h3 {
+  font-size: clamp(13px, 1.2vw, 16px);
+  margin: 0 0 0.4em 0;
+  color: var(--verde-osc);
+}
+.intro-row p {
+  font-size: clamp(10.5px, 1vw, 12.5px);
+  line-height: 1.4;
+  margin: 0;
+  color: var(--gris-texto);
+}
+
+/* ---------- SLIDE 3 : LÍNEA DE TIEMPO ---------- */
+.timeline-wrap {
+  position: absolute;
+  left: 6%; right: 6%; top: 32%;
+  height: 2px; background: #C9CDC7;
+}
+.tl-dot {
+  position: absolute; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px; height: 22px;
+  border-radius: 50%; border: 3px solid var(--blanco);
+}
+.tl-card {
+  position: absolute; width: 17%;
+  padding: 0.9em 1em;
+  background: var(--blanco);
+  border: 1px solid var(--gris-borde);
+  border-radius: 9px;
+  transform: translateX(-50%);
+}
+.tl-card .d {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1;
+}
+.tl-card .m { font-size: 9px; font-weight: 700; letter-spacing: 2px; }
+.tl-card h4 {
+  font-size: clamp(11px, 1.05vw, 13px);
+  margin: 0.5em 0 0.3em 0;
+  color: var(--verde-osc);
+}
+.tl-card p {
+  font-size: clamp(9px, 0.85vw, 11px);
+  line-height: 1.35;
+  margin: 0;
+  color: var(--gris-texto);
+}
+.tl-connector {
+  position: absolute; width: 1px;
+  border-left: 1.5px dashed #C9CDC7; top: 32%;
+}
+
+/* ---------- SLIDE 4 : PERSONAJES ---------- */
+.grid-3 {
+  position: absolute;
+  left: 5%; right: 5%; top: 22%; bottom: 8%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 2%;
+}
+.persona { padding: 1em 1.1em; display: flex; flex-direction: column; }
+.persona .head { display: flex; align-items: center; gap: 0.7em; margin-bottom: 0.6em; }
+.persona h3 { margin: 0; font-size: clamp(12.5px, 1.15vw, 15px); color: var(--verde-osc); }
+.persona .rol { font-style: italic; color: var(--rojo); font-size: clamp(9.5px, 0.9vw, 11.5px); }
+.persona p { font-size: clamp(9.5px, 0.9vw, 11.5px); line-height: 1.4; margin: 0; color: var(--gris-texto); }
+
+/* ---------- SLIDE 5 : DATOS CURIOSOS ---------- */
+.grid-2 {
+  position: absolute;
+  left: 5%; right: 5%; top: 22%; bottom: 8%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3%;
+}
+.dato { padding: 1.2em 1.4em; }
+.dato .head { display: flex; align-items: center; gap: 1em; margin-bottom: 0.7em; }
+.dato h3 { margin: 0; font-size: clamp(13px, 1.25vw, 16px); color: var(--verde-osc); }
+.dato p { font-size: clamp(10px, 1vw, 12.5px); line-height: 1.45; margin: 0; color: var(--gris-texto); }
+
+/* ---------- SLIDE 6 : MITOS VS REALIDAD ---------- */
+.mvr-head {
+  position: absolute; top: 20%;
+  display: flex; align-items: center; justify-content: center;
+  width: 45%; height: 8%; border-radius: 8px;
+  color: var(--blanco); font-weight: 700;
+  letter-spacing: 3px; font-size: clamp(12px, 1.2vw, 15px);
+}
+.mvr-head.mito { left: 5%; background: var(--rojo); }
+.mvr-head.real { right: 5%; background: var(--verde); }
+.mvr-row { position: absolute; left: 5%; right: 5%; display: flex; gap: 5%; }
+.mvr-box { flex: 1; padding: 1em 1.3em; display: flex; align-items: center; }
+.mvr-box.mito { border: 1.5px solid #F1D3D6; }
+.mvr-box.real { border: 1.5px solid #D6EBDD; }
+.mvr-box p { margin: 0; font-size: clamp(10.5px, 1.05vw, 13px); line-height: 1.4; }
+
+/* ---------- SLIDE 7 : CIERRE ---------- */
+#s7 { display: flex; align-items: center; justify-content: center; text-align: center; }
+#s7 .circle.c1 {
+  width: 34%; height: 0; padding-bottom: 34%;
+  bottom: -14%; left: -6%; background: var(--verde); opacity: 0.55;
+}
+#s7 .circle.c2 {
+  width: 28%; height: 0; padding-bottom: 28%;
+  top: -12%; right: -4%; background: var(--rojo); opacity: 0.4;
+}
+#s7 .quote-wrap { position: relative; z-index: 2; max-width: 70%; }
+#s7 blockquote {
+  font-family: Georgia, serif; font-style: italic; font-weight: 700;
+  font-size: clamp(22px, 3.4vw, 40px); color: var(--blanco); margin: 0 0 0.4em 0;
+}
+#s7 .author { color: var(--dorado); font-weight: 700; font-size: clamp(12px, 1.1vw, 15px); margin-bottom: 1.4em; }
+#s7 .viva { color: #D8E6DC; font-size: clamp(12px, 1.1vw, 15px); margin-top: 1.4em; }
+
+/* ---------- NAVEGACIÓN Y PUNTOS DE HOVER ---------- */
+.nav {
+  position: absolute; bottom: 16px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 14px; z-index: 10;
+}
+.dots { display: flex; gap: 12px; padding: 10px; }
+.dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer; transition: all 0.2s ease;
+}
+.dot:hover, .dot.active {
+  background: var(--verde);
+  width: 26px; border-radius: 6px;
+}
+
+.counter {
+  position: absolute; top: 16px; right: 22px; z-index: 10;
+  font-size: 12px; color: rgba(0, 0, 0, 0.35); font-family: Arial, sans-serif;
+}
+.slide.dark ~ .counter { color: rgba(255, 255, 255, 0.6); }
+
+@media (max-width: 700px) {
+  .stage { width: 100vw; height: 56.25vw; }
+}
